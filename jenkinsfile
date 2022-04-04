@@ -4,6 +4,6 @@
      }
 
      stage('Build image') {
-         app = docker.build("gyus13/jenkins:$BUILD_NUMBER")
+         app = docker.build("gyus13/jenkins")
      }
 }
