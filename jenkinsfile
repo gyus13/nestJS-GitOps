@@ -1,8 +1,4 @@
-pipeline {
-    agent any
-
-    stages{
-
+node {
         stage('Clone repository') {
           checkout scm
         }
@@ -10,5 +6,5 @@ pipeline {
         stage('Build image') {
             app = docker.build("gyus13/jenkins")
         }
-    }
+
 }
