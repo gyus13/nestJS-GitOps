@@ -35,12 +35,12 @@ pipeline {
             // Docker plugin and Docker Pipeline 두개를 깔아야 사용가능!
             agent {
               docker {
-                image 'node:latest'
+                image 'node:16'
               }
             }
             
             steps {
-              dir ('.'){
+              dir ('./'){
                   sh '''
                   npm install&&
                   npm run lint
@@ -52,13 +52,13 @@ pipeline {
         stage('Test Backend') {
           agent {
             docker {
-              image 'node:latest'
+              image 'node:16'
             }
           }
           steps {
             echo 'Test Backend'
 
-            dir ('.'){
+            dir ('./'){
                 sh '''
                 npm install
                 npm run test
@@ -72,7 +72,7 @@ pipeline {
           steps {
             echo 'Build Backend'
 
-            dir ('.'){
+            dir ('./'){
                 sh """
                 docker image build -t gyus13/blog:latest . 
                 """
