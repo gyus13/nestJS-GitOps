@@ -31,59 +31,54 @@ pipeline {
             }
         }
         
-        stage('Lint Backend') {
-            // Docker plugin and Docker Pipeline 두개를 깔아야 사용가능!
-            agent {
-              docker {
-                image 'node:16'
-              }
-            }
-            
-            steps {
-              dir ('./'){
-                  sh '''
-                  npm install&&
-                  npm run lint
-                  '''
-              }
-            }
-        }
-        
-        stage('Test Backend') {
-          agent {
-            docker {
-              image 'node:16'
-            }
-          }
-          steps {
-            echo 'Test Backend'
-
-            dir ('./'){
-                sh '''
-                npm install
-                npm run test
-                '''
-            }
-          }
-        }
+//         stage('Lint Backend') {
+//             // Docker plugin and Docker Pipeline 두개를 깔아야 사용가능!
+//             agent {
+//               docker {
+//                 image 'node:16'
+//               }
+//             }
+//
+//             steps {
+//               dir ('./'){
+//                   sh '''
+//                   npm install&&
+//                   npm run lint
+//                   '''
+//               }
+//             }
+//         }
+//
+//         stage('Test Backend') {
+//           agent {
+//             docker {
+//               image 'node:16'
+//             }
+//           }
+//           steps {
+//             echo 'Test Backend'
+//
+//             dir ('./'){
+//                 sh '''
+//                 npm install
+//                 npm run test
+//                 '''
+//             }
+//           }
+//         }
         
         stage('Bulid Backend') {
-          agent any
-          steps {
-            echo 'Build Backend'
-
-            dir ('./'){
-                sh """
-                docker image build -t gyus13/blog:latest . 
-                """
-            }
-          }
-
-          post {
-            failure {
-              error 'This pipeline stops here...'
-            }
-          }
+            agent {
+                    docker {
+                        image 'gyus13/blog:latest'
+                        args '-p 9292:3000'
+                    }
+                }
+//           post {
+//             failure {
+//               error 'This pipeline stops here...'
+//             }
+//           }
         }
         
         // stage('Deploy Backend') {
