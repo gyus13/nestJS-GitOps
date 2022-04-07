@@ -1,0 +1,16 @@
+#!/bin/sh
+ssh ubuntu@52.79.232.34 <<EOF
+    cd ~/blog
+    git pull origin master
+    curl -o-   https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh    | bash
+    . ~/.nvm/nvm.sh
+    nvm install 17.1.0
+    npm install
+    npm install -g typescript
+    npm install -g ts-node
+    npm install -g pm2
+    npm test
+    pm2 install typescript
+    pm2 restart ecosystem.config.js
+    exit
+EOF
