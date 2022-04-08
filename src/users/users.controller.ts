@@ -10,8 +10,8 @@ export class UsersController {
     return 'typeorm in nest, just coding';
   }
 
-  @Post('signup')
-  async signUp(@Body userRegisterDTO: UserRegisterDTO) {
+  @Post()
+  async signUp(@Body() userRegisterDTO: UserRegisterDTO) {
     return await this.userService.registerUser(userRegisterDTO);
   }
 
