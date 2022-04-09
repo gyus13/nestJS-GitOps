@@ -19,4 +19,9 @@ export class UsersController {
   login(): string {
     return 'login';
   }
+
+  @Get()
+  async getUsers() {
+    return await this.userService.findAllUser();
+  }
 }

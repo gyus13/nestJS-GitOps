@@ -6,8 +6,6 @@ import {InjectRepository} from "@nestjs/typeorm";
 
 @Injectable()
 export class UsersService {
-  private readonly logger = new Logger(UsersService.name)
-
   constructor(
     @InjectRepository(UserEntity)
     private readonly usersRepository: Repository<UserEntity>,
@@ -26,4 +24,9 @@ export class UsersService {
       password,
     });
   }
+
+  async findAllUser() {
+    return ''
+  }
+
 }
