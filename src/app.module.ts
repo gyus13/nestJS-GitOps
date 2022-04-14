@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module';
 // import { TagsModule } from './tags/tags.module';
 // import { VisitorsModule } from './visitors/visitors.module';
 // import { ProfilesModule } from './profiles/profiles.module';
+import { AuthModule } from './auth/auth.module';
 
 const typeOrmModuleOptions = {
   useFactory: async (
@@ -52,6 +53,7 @@ const typeOrmModuleOptions = {
     }),
     TypeOrmModule.forRootAsync(typeOrmModuleOptions),
     UsersModule,
+    AuthModule,
     // BlogsModule,
     // TagsModule,
     // VisitorsModule,
